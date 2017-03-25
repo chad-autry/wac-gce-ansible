@@ -5,7 +5,7 @@ Containerized Ansible for use within Google Compute Engine
 * Uses gcloud to automagically connect to instances
 
 ### Status
-[![Build Status](https://travis-ci.org/chad-autry/wac-ansible.svg?branch=master)](https://travis-ci.org/chad-autry/wac-gce-ansible)
+[![Build Status](https://travis-ci.org/chad-autry/wac-gce-ansible.svg?branch=master)](https://travis-ci.org/chad-autry/wac-gce-ansible)
 [![Docker Hub](https://img.shields.io/badge/docker-ready-blue.svg)](https://registry.hub.docker.com/u/chadautry/wac-gce-ansible/)
 
 # Example
