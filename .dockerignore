@@ -1,0 +1,7 @@
+.git
+.gitignore
+.travis.yml
+LICENSE
+READ.md
+npm-debug.log
+package.json

@@ -1,0 +1,16 @@
+---
+sudo: required
+services:
+- docker
+language: node_js
+node_js:
+- '0.10'
+env:
+  global:
+  - GH_REF: github.com/chad-autry/wac-gce-ansible
+script:
+- docker build -t chadautry/wac-gce-ansible:latest .
+- if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag chadautry/wac-gce-ansible:latest chadautry/wac-gce-ansible:$TRAVIS_TAG ; fi
+after_success:
+- docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+- docker push chadautry/wac-gce-ansible

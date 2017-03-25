@@ -1,0 +1,22 @@
+{
+  "name": "wac-gce-ansible",
+  "version": "0.0.0",
+  "description": "Docker containerized ansible for use within GCE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chad-autry/wac-gce-ansible"
+  },
+  "keywords": [
+    "Docker",
+    "Ansible"
+  ],
+  "author": {
+    "name": "Chad Autry",
+    "url": "http://chad-autry.github.io/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chad-autry/wac-gce-ansible/issues"
+  },
+  "homepage": "https://github.com/chad-autry/wac-gce-ansible"
+}
