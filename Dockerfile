@@ -3,7 +3,7 @@ RUN apk del openssh-client
 
 ENV \
   GCLOUD_SDK_VERSION="148.0.1" \
-  GCLOUD_SDK_SHASUM="feae23a6d3d29e8b13c235c59d0cbbed7e0f24bc"
+  GCLOUD_SDK_SHASUM="c90bccc35bb3fb5f0a3f286277bc33acbe2517ff"
 
 ENV \
   GCLOUD_SDK_URL="https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_SDK_VERSION}-linux-x86_64.tar.gz" \
