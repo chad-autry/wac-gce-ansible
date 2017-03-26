@@ -14,7 +14,7 @@ ENV \
 ADD ${GCLOUD_SDK_URL} /etc/${GCLOUD_SDK_FILENAME}
 
 RUN \
-  (echo "${GCLOUD_SDK_SHASUM}  ${GCLOUD_SDK_FILENAME}" | sha1sum -c -) && \
+  (echo "${GCLOUD_SDK_SHASUM}  /etc/${GCLOUD_SDK_FILENAME}" | sha1sum -c -) && \
   tar xf "/etc/${GCLOUD_SDK_FILENAME}" && \
   rm /etc/${GCLOUD_SDK_FILENAME}
   
