@@ -1,0 +1,7 @@
+#!/bin/sh
+
+arguments = "$@"
+
+zone = echo $arguments | sed 
+
+/etc/google-cloud-sdk/bin/gcloud 
