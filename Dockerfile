@@ -21,9 +21,10 @@ RUN \
 # Copy gce.py to /etc/ansible/hosts
 RUN mkdir -p /etc/ansible/hosts && \
   cp /opt/ansible/contrib/inventory/gce.py /etc/ansible/hosts/ && \
-  chmod -x /etc/ansible/hosts/gce.py
+  chmod 700 /etc/ansible/hosts/gce.py
 
 # Edit gce.py with sed (single line change) to provide needed info with ansible_host
+RUN sed -i "s/'ansible_ssh_host': ssh_host/'ansible_ssh_host': inst.name + ':' + inst.extra['zone'].name/" /etc/ansible/hosts/gce.py
 
 # Add localhost file to /etc/ansible/hosts
 
