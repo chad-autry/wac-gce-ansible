@@ -1,4 +1,6 @@
 FROM chadautry/wac-ansible:latest 
+
+# Remove the ssh client, we use gcloud instead
 RUN apk del openssh-client
 
 ENV \
@@ -15,9 +17,10 @@ RUN \
   (echo "${GCLOUD_SDK_SHASUM}  ${GCLOUD_SDK_FILENAME}" | sha1sum -c -) && \
   tar xf "${GCLOUD_SDK_FILENAME}"
   
- TODO gce.py gce.ini
- TODO gcloud compute ssh aliased as ssh, 
-     edited gce.py to connect to instance name instead of ip?
-     edited gce.py to set --zone hostvar?
- TODO gcloud compute copy aliased as sftp
-ENV PYTHONPATH /ansible/lib
+# Copy gce.py to /etc/ansible/hosts
+
+# Edit gce.py with sed (single line change) to provide needed info with ansible_host
+
+# Add localhost file to /etc/ansible/hosts
+
+# Copy and make executable the shell scripts that mimic ssh and sftp with gcloud
