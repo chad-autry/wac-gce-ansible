@@ -3,6 +3,7 @@ FROM chadautry/wac-ansible:latest
 # Remove the ssh client, we use gcloud instead
 RUN apk del openssh-client
 
+# Install and clean up gcloud
 ENV \
   GCLOUD_SDK_VERSION="148.0.1" \
   GCLOUD_SDK_SHASUM="c90bccc35bb3fb5f0a3f286277bc33acbe2517ff"
@@ -27,5 +28,6 @@ RUN mkdir -p /etc/ansible/hosts && \
 RUN sed -i "s/'ansible_ssh_host': ssh_host/'ansible_ssh_host': inst.name + ':' + inst.extra['zone'].name/" /etc/ansible/hosts/gce.py
 
 # Add localhost file to /etc/ansible/hosts
+COPY localhost /etc/ansible/hosts
 
 # Copy and make executable the shell scripts that mimic ssh and sftp with gcloud
