@@ -1,7 +1,31 @@
 #!/bin/sh
 
-arguments = "$@"
+command = ""
+host = ""
+zone = ""
+ssh_args = ""
+while test $# -gt 0; do
+    if [$# -eq 2]; then
+        case "$1" in 
+            *:ZONE_DELIMITER:*)
+                host = echo $1 | sed 's/.*:ZONE_DELIMITER://'
+                zone = echo $1 | sed 's/:ZONE_DELIMITER:.*//'
+                shift
+                command = "--command $1"
+                shift
+            ;;
+        esac
+    elif [$# -eq 1]; then
+       host = echo $1 | sed 's/.*:ZONE_DELIMITER://' 
+       zone = echo $1 | sed 's/:ZONE_DELIMITER:.*//'
+       shift
+    else
+        if [$ssh_args -eq ""]; then
+            ssh_args = "--"
+        fi
+        ssh_args = "$ssh_args  $1"
+        shift
+    fi
+done
 
-zone = echo $arguments | sed 
-
-/etc/google-cloud-sdk/bin/gcloud 
+eval "/etc/google-cloud-sdk/bin/gcloud compute ssh $host $command --zone $zone -- $ssh_args"
