@@ -12,11 +12,13 @@ ENV \
   GCLOUD_SDK_URL="https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_SDK_VERSION}-linux-x86_64.tar.gz" \
   GCLOUD_SDK_FILENAME="google-cloud-sdk-${GCLOUD_SDK_VERSION}.tar.gz"
 
-ADD ${GCLOUD_SDK_URL} /etc/${GCLOUD_SDK_FILENAME}
+ADD ${GCLOUD_SDK_URL} ${GCLOUD_SDK_FILENAME}
 
 RUN \
-  (echo "${GCLOUD_SDK_SHASUM}  /etc/${GCLOUD_SDK_FILENAME}" | sha1sum -c -) && \
-  tar xf "/etc/${GCLOUD_SDK_FILENAME}"
+  mkdir /etc/google-cloud-sdk && \
+  (echo "${GCLOUD_SDK_SHASUM}  ${GCLOUD_SDK_FILENAME}" | sha1sum -c -) && \
+  tar xf "${GCLOUD_SDK_FILENAME}" -C /etc/google-cloud-sdk && \
+  rm "${GCLOUD_SDK_FILENAME}"
   
 # Copy gce.py to /etc/ansible/hosts
 RUN mkdir -p /etc/ansible/hosts && \
