@@ -16,8 +16,7 @@ ADD ${GCLOUD_SDK_URL} /etc/${GCLOUD_SDK_FILENAME}
 
 RUN \
   (echo "${GCLOUD_SDK_SHASUM}  /etc/${GCLOUD_SDK_FILENAME}" | sha1sum -c -) && \
-  tar xf "/etc/${GCLOUD_SDK_FILENAME}" && \
-  rm /etc/${GCLOUD_SDK_FILENAME}
+  tar xf "/etc/${GCLOUD_SDK_FILENAME}"
   
 # Copy gce.py to /etc/ansible/hosts
 RUN mkdir -p /etc/ansible/hosts && \
