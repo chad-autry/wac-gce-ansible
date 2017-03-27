@@ -12,11 +12,12 @@ while test $# -gt 0; do
             shift
             while test $# -gt 0; do
                 if [$command -eq ""]; then
-                    command="--command"
+                    command="--command=\""
                 fi
                 command="$command $1"
                 shift
             done
+            command="$command\""
         ;;
     esac
 
@@ -27,4 +28,5 @@ while test $# -gt 0; do
     shift
 done
 
-eval "/etc/google-cloud-sdk/bin/gcloud compute ssh $host $command --zone $zone $ssh_args"
+gcloudCommand="/etc/google-cloud-sdk/bin/gcloud compute ssh $host $command --zone=$zone $ssh_args"
+$gcloudCommand
