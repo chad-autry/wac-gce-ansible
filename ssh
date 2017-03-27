@@ -7,8 +7,8 @@ ssh_args=""
 while test $# -gt 0; do
     case "$1" in 
         *:ZONE_DELIMITER:*)
-            host=echo $1 | sed 's/.*:ZONE_DELIMITER://'
-            zone=echo $1 | sed 's/:ZONE_DELIMITER:.*//'
+            host=$(echo $1 | sed 's/:ZONE_DELIMITER:.*//')
+            zone=$(echo $1 | sed 's/.*:ZONE_DELIMITER://')
             shift
             while test $# -gt 0; do
                 if [$command -eq ""]; then
