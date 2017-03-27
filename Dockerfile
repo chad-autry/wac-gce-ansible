@@ -1,8 +1,5 @@
 FROM chadautry/wac-ansible:latest 
 
-# Remove the ssh client, we use gcloud instead
-RUN apk del openssh-client
-
 # Install and clean up gcloud
 ENV \
   GCLOUD_SDK_VERSION="148.0.1" \
@@ -31,6 +28,7 @@ RUN sed -i "s/'ansible_ssh_host': ssh_host/'ansible_ssh_host': inst.name + ':ZON
 # Add localhost file to /etc/ansible/hosts
 COPY localhost /etc/ansible/hosts
 
+ENV ANSIBLE_SSH_EXECUTABLE="/bin/gcloudSshWrapper"
 # Copy and make executable the shell script that mimics ssh with gcloud
-COPY ssh /bin/ssh
-RUN chmod 700 /bin/ssh
+COPY ssh /bin/gcloudSshWrapper
+RUN chmod 700 /bin/gcloudSshWrapper
