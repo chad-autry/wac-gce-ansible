@@ -5,27 +5,26 @@ host=""
 zone=""
 ssh_args=""
 while test $# -gt 0; do
-    if [$# -eq 2]; then
-        case "$1" in 
-            *:ZONE_DELIMITER:*)
-                host=echo $1 | sed 's/.*:ZONE_DELIMITER://'
-                zone=echo $1 | sed 's/:ZONE_DELIMITER:.*//'
+    case "$1" in 
+        *:ZONE_DELIMITER:*)
+            host=echo $1 | sed 's/.*:ZONE_DELIMITER://'
+            zone=echo $1 | sed 's/:ZONE_DELIMITER:.*//'
+            shift
+            while test $# -gt 0; do
+                if [$command -eq ""]; then
+                    command="--command"
+                fi
+                command="$command $1"
                 shift
-                command="--command $1"
-                shift
-            ;;
-        esac
-    elif [$# -eq 1]; then
-       host = echo $1 | sed 's/.*:ZONE_DELIMITER://' 
-       zone = echo $1 | sed 's/:ZONE_DELIMITER:.*//'
-       shift
-    else
-        if [$ssh_args -eq ""]; then
-            ssh_args="--"
-        fi
-        ssh_args="$ssh_args  $1"
-        shift
+            done
+        ;;
+    esac
+
+    if [$ssh_args -eq ""]; then
+        ssh_args="--"
     fi
+    ssh_args="$ssh_args  $1"
+    shift
 done
 
-eval "/etc/google-cloud-sdk/bin/gcloud compute ssh $host $command --zone $zone -- $ssh_args"
+eval "/etc/google-cloud-sdk/bin/gcloud compute ssh $host $command --zone $zone $ssh_args"
