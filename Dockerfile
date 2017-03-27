@@ -25,9 +25,11 @@ RUN mkdir -p /etc/ansible/hosts && \
   chmod 700 /etc/ansible/hosts/gce.py
 
 # Edit gce.py with sed (single line change) to provide needed info with ansible_host
-RUN sed -i "s/'ansible_ssh_host': ssh_host/'ansible_ssh_host': inst.name + ':' + inst.extra['zone'].name/" /etc/ansible/hosts/gce.py
+RUN sed -i "s/'ansible_ssh_host': ssh_host/'ansible_ssh_host': inst.name + ':ZONE_DELIMITER:' + inst.extra['zone'].name/" /etc/ansible/hosts/gce.py
 
 # Add localhost file to /etc/ansible/hosts
 COPY localhost /etc/ansible/hosts
 
-# Copy and make executable the shell scripts that mimic ssh and sftp with gcloud
+# Copy and make executable the shell script that mimics ssh with gcloud
+COPY ssh /bin/ssh
+chmod 700 /bin/ssh
