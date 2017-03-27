@@ -1,17 +1,17 @@
 #!/bin/sh
 
-command = ""
-host = ""
-zone = ""
-ssh_args = ""
+command=""
+host=""
+zone=""
+ssh_args=""
 while test $# -gt 0; do
     if [$# -eq 2]; then
         case "$1" in 
             *:ZONE_DELIMITER:*)
-                host = echo $1 | sed 's/.*:ZONE_DELIMITER://'
-                zone = echo $1 | sed 's/:ZONE_DELIMITER:.*//'
+                host=echo $1 | sed 's/.*:ZONE_DELIMITER://'
+                zone=echo $1 | sed 's/:ZONE_DELIMITER:.*//'
                 shift
-                command = "--command $1"
+                command="--command $1"
                 shift
             ;;
         esac
@@ -21,9 +21,9 @@ while test $# -gt 0; do
        shift
     else
         if [$ssh_args -eq ""]; then
-            ssh_args = "--"
+            ssh_args="--"
         fi
-        ssh_args = "$ssh_args  $1"
+        ssh_args="$ssh_args  $1"
         shift
     fi
 done
