@@ -32,4 +32,4 @@ COPY localhost /etc/ansible/hosts
 
 # Copy and make executable the shell script that mimics ssh with gcloud
 COPY ssh /bin/ssh
-chmod 700 /bin/ssh
+RUN chmod 700 /bin/ssh
