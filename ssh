@@ -17,7 +17,9 @@ while test $# -gt 0; do
                 command="$command $1"
                 shift
             done
-            command="$command\""
+            if [$command -ne ""]; then
+                command="$command\""
+            fi
         ;;
     esac
 
@@ -28,5 +30,5 @@ while test $# -gt 0; do
     shift
 done
 
-gcloudCommand="/etc/google-cloud-sdk/bin/gcloud compute ssh $host $command --zone=$zone $ssh_args"
+gcloudCommand="/etc/google-cloud-sdk/bin/gcloud compute ssh $host $command --quiet --zone=$zone $ssh_args"
 $gcloudCommand
