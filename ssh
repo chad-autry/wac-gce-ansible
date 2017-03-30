@@ -20,6 +20,7 @@ while test $# -gt 0; do
             if [$command -ne ""]; then
                 command="$command\""
             fi
+            break
         ;;
     esac
 
