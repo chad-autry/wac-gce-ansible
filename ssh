@@ -33,3 +33,4 @@ done
 
 gcloudCommand="/etc/google-cloud-sdk/bin/gcloud compute ssh $host $command --quiet --zone=$zone $ssh_args"
 $gcloudCommand
+return $?
