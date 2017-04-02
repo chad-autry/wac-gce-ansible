@@ -1,36 +1,29 @@
-#!/bin/sh
-
-command=""
+#!/bin/bash
+command_args=()
 host=""
 zone=""
-ssh_args=""
+ssh_args=()
 while test $# -gt 0; do
-    case "$1" in 
+    case "$1" in
         *:ZONE_DELIMITER:*)
             host=$(echo $1 | sed 's/:ZONE_DELIMITER:.*//')
             zone=$(echo $1 | sed 's/.*:ZONE_DELIMITER://')
             shift
             while test $# -gt 0; do
-                if [$command -eq ""]; then
-                    command="--command=\""
+                if [ ${#command_args[@]} -eq 0 ]; then
+                    command_args+=(--command)
+                    command_args+=("")
                 fi
-                command="$command $1"
+                command_args[1]="${command_args[1]} $1"
                 shift
             done
-            if [$command -ne ""]; then
-                command="$command\""
-            fi
             break
         ;;
     esac
-
-    if [$ssh_args -eq ""]; then
-        ssh_args="--"
+    if [ ${#ssh_args[@]} -eq 0 ]; then
+        ssh_args+=(--)
     fi
-    ssh_args="$ssh_args  $1"
+    ssh_args+=($1)
     shift
 done
-
-gcloudCommand="/etc/google-cloud-sdk/bin/gcloud compute ssh $host $command --quiet --zone=$zone $ssh_args"
-$gcloudCommand
-return $?
+gcloud compute ssh "$host" "${command_args[@]}" --quiet --zone "$zone" "${ssh_args[@]}"
