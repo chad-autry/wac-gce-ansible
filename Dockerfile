@@ -30,5 +30,5 @@ COPY localhost /etc/ansible/hosts
 
 ENV ANSIBLE_SSH_EXECUTABLE="/bin/gcloudSshWrapper"
 # Copy and make executable the shell script that mimics ssh with gcloud
-COPY ssh /bin/gcloudSshWrapper
+COPY gcloudSshWrapper /bin/gcloudSshWrapper
 RUN chmod 700 /bin/gcloudSshWrapper
