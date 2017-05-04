@@ -1,2 +1,2 @@
 # Single entry for localhost. Reset the python interpreter to default (assuming globally changed for the machines being managed)
-localhost ansible_connection=local ansible_python_interpreter=/etc/bin/python
+localhost ansible_connection=local ansible_python_interpreter=/usr/bin/python
