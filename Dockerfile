@@ -1,7 +1,7 @@
 FROM python:3.7.0-alpine3.8
 
-RUN apk add --no-cache \
-    ansible@edge
+RUN apk update add --no-cache \
+    ansibl
 RUN pip install requests google-auth
 WORKDIR /var/ansible
 
