@@ -1,9 +1,32 @@
 FROM python:3.7.0-alpine3.8
 
+ENV BUILD_PACKAGES \
+  bash \
+  curl \
+  tar \
+  openssh-client \
+  sshpass \
+  git \
+  python \
+  py-boto \
+  py-dateutil \
+  py-httplib2 \
+  py-jinja2 \
+  py-paramiko \
+  py-pip \
+  py-yaml \
+  ca-certificates
+RUN apk --update add --virtual build-dependencies \
+      gcc \
+      musl-dev \
+      libffi-dev \
+      openssl-dev \
+      python-dev
 RUN apk update 
 RUN apk upgrade musl --no-cache --update-cache --repository http://nl.alpinelinux.org/alpine/edge/main
-RUN apk add --no-cache --virtual .pynacl_deps build-base python3-dev libffi-dev
-RUN pip install requests google-auth ansible>=2.7
+RUN pip python-keyczar docker-py install requests google-auth ansible>=2.7
+RUN apk del build-dependencies
+RUN rm -rf /var/cache/apk/*
 WORKDIR /var/ansible
 
 ENV ANSIBLE_GATHERING explicit
