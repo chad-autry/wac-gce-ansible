@@ -2,6 +2,7 @@ FROM python:3.7.0-alpine3.8
 
 RUN apk update 
 RUN apk upgrade musl --no-cache --update-cache --repository http://nl.alpinelinux.org/alpine/edge/main
+RUN apk add --no-cache --virtual .pynacl_deps build-base python3-dev libffi-dev
 RUN pip install requests google-auth ansible>=2.7
 WORKDIR /var/ansible
 
