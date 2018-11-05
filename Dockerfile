@@ -4,8 +4,8 @@ RUN apk update
 RUN apk upgrade musl --no-cache --update-cache --repository http://nl.alpinelinux.org/alpine/edge/main
 RUN apk add --no-cache \
     'ansible>2.7' --update-cache --repository http://nl.alpinelinux.org/alpine/edge/main
-RUN apk add --no-cache pip3 
-RUN pip3 install requests google-auth
+#RUN apk add --no-cache py3-py
+#RUN pip install requests google-auth
 WORKDIR /var/ansible
 
 ENV ANSIBLE_GATHERING explicit
