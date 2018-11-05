@@ -24,7 +24,7 @@ RUN apk --update add --virtual build-dependencies \
       python-dev
 RUN apk update 
 RUN apk upgrade musl --no-cache --update-cache --repository http://nl.alpinelinux.org/alpine/edge/main
-RUN pip python-keyczar docker-py install requests google-auth ansible>=2.7
+RUN pip install python-keyczar docker-py requests google-auth ansible>=2.7
 RUN apk del build-dependencies
 RUN rm -rf /var/cache/apk/*
 WORKDIR /var/ansible
