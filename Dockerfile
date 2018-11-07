@@ -1,11 +1,22 @@
 FROM alpine:3.8
 
-RUN apk update 
-RUN apk upgrade musl --no-cache --update-cache --repository http://nl.alpinelinux.org/alpine/edge/main
-RUN apk add --no-cache \
-    'ansible>2.7' --update-cache --repository http://nl.alpinelinux.org/alpine/edge/main
-#RUN apk add --no-cache py3-py
-#RUN pip install requests google-auth
+ENV ANSIBLE_VERSION=2.7.1
+
+RUN set -xe \
+    && echo "****** Install system dependencies ******" \
+    && apk add --no-cache --progress python py-pip openssl \
+		ca-certificates git openssh sshpass \
+	&& apk --update add --virtual build-dependencies \
+		python-dev libffi-dev openssl-dev build-base \
+	\
+	&& echo "****** Install ansible and python dependencies ******" \
+    && pip install --upgrade pip \
+	&& pip install ansible==${ANSIBLE_VERSION} boto boto3 requests google-auth \
+    \
+    && echo "****** Remove unused system librabies ******" \
+	&& apk del build-dependencies \
+	&& rm -rf /var/cache/apk/* 
+
 WORKDIR /var/ansible
 
 ENV ANSIBLE_GATHERING explicit
