@@ -1,6 +1,6 @@
 FROM alpine:3.8
 
-ENV ANSIBLE_VERSION=2.7.1
+ENV ANSIBLE_VERSION=2.7.0
 
 RUN set -xe \
     && echo "****** Install system dependencies ******" \
