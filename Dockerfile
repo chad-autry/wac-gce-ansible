@@ -1,11 +1,26 @@
 FROM alpine:3.8
 
 ENV ANSIBLE_VERSION=2.7.0
+ENV CLOUD_SDK_VERSION=224.0.0
+
+ENV PATH /google-cloud-sdk/bin:$PATH
 
 RUN set -xe \
     && echo "****** Install system dependencies ******" \
-    && apk add --no-cache --progress python py-pip openssl \
-		ca-certificates git openssh sshpass \
+    && apk add --no-cache --progress \
+        curl \
+        python \
+        py-crcmod \
+        bash \
+        libc6-compat \
+        openssh-client \
+        git \
+        gnupg \
+        py-pip \
+        openssl \
+        ca-certificates
+        openssh \
+        sshpass \
 	&& apk --update add --virtual build-dependencies \
 		python-dev libffi-dev openssl-dev build-base \
 	\
@@ -13,6 +28,14 @@ RUN set -xe \
     && pip install --upgrade pip \
 	&& pip install ansible==${ANSIBLE_VERSION} boto boto3 requests google-auth \
     \
+    && echo "****** Install gcloud ******" \
+    && curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
+    tar xzf google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
+    rm google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
+    ln -s /lib /lib64 && \
+    gcloud config set core/disable_usage_reporting true && \
+    gcloud config set component_manager/disable_update_check true && \
+    gcloud config set metrics/environment github_docker_image && \
     && echo "****** Remove unused system librabies ******" \
 	&& apk del build-dependencies \
 	&& rm -rf /var/cache/apk/* 
