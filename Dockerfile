@@ -18,7 +18,7 @@ RUN set -xe \
         gnupg \
         py-pip \
         openssl \
-        ca-certificates
+        ca-certificates \
         openssh \
         sshpass \
 	&& apk --update add --virtual build-dependencies \
