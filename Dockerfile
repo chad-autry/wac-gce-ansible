@@ -35,7 +35,7 @@ RUN set -xe \
     ln -s /lib /lib64 && \
     gcloud config set core/disable_usage_reporting true && \
     gcloud config set component_manager/disable_update_check true && \
-    gcloud config set metrics/environment github_docker_image && \
+    gcloud config set metrics/environment github_docker_image \
     && echo "****** Remove unused system librabies ******" \
 	&& apk del build-dependencies \
 	&& rm -rf /var/cache/apk/* 
