@@ -47,6 +47,19 @@ ENV ANSIBLE_HOST_KEY_CHECKING false
 ENV ANSIBLE_RETRY_FILES_ENABLED false
 ENV ANSIBLE_SSH_PIPELINING True
 ENV ANSIBLE_INVENTORY_ENABLED "gcp_compute, host_list, script, yaml, ini, auto"
+ENV ANSIBLE_SSH_EXECUTABLE="/bin/gcloudSshWrapper"
+
 ENV PATH /opt/ansible/bin:$PATH
 
-ENTRYPOINT ["ansible-playbook"]
+# Copy and make executable the shell script that mimics ssh with gcloud
+COPY gcloudSshWrapper /bin/gcloudSshWrapper
+RUN chmod 700 /bin/gcloudSshWrapper
+
+# Copy and make executable the entrypoint script
+COPY entrypoint.sh /bin/entrypoint.sh
+RUN chmod 700 /bin/entrypoint.sh
+
+# Add localhost file to /etc/ansible/hosts
+COPY localhost /etc/ansible/hosts
+
+ENTRYPOINT ["entrypoint.sh"]
