@@ -60,7 +60,7 @@ COPY entrypoint.sh /bin/entrypoint.sh
 RUN chmod 700 /bin/entrypoint.sh
 
 # Add localhost file to /etc/ansible/hosts
-COPY localhost /etc/ansible/hosts
+COPY localhost /etc/ansible/hosts/localhost
 
 # Add gcp plugin template
 COPY inventory.gcp.yml.template /usr/var/ansible/inventory.gcp.yml.template
