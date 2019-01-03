@@ -5,6 +5,10 @@ projects:
 filters:
 auth_kind: serviceaccount
 service_account_file: ${GCP_SERVICE_ACCOUNT_FILE}
+keyed_groups:
+  # Group by applied label
+  - key: labels
+    separator: ""
 compose:
   # Set ansible host to the <name>ZONE_DELIMITER<zone> format required by gcloudSshWrapper
   ansible_host: name + \"ZONE_DELIMITER\" + zone
