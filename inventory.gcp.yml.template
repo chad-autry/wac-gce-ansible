@@ -8,3 +8,5 @@ service_account_file: ${GCP_SERVICE_ACCOUNT_FILE}
 compose:
   # Set ansible host to the <name>ZONE_DELIMITER<zone> format required by gcloudSshWrapper
   ansible_host: name + \"ZONE_DELIMITER\" + zone
+  # Set the first private IP directly as a host var
+  private_ip: networkInterfaces[0].networkIP
