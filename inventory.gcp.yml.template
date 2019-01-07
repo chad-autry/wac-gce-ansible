@@ -9,6 +9,7 @@ keyed_groups:
   # Group by applied label
   - key: labels
     separator: ""
+    prefix: ""
 compose:
   # Set ansible host to the <name>ZONE_DELIMITER<zone> format required by gcloudSshWrapper
   ansible_host: name + \"ZONE_DELIMITER\" + zone
