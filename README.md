@@ -3,6 +3,7 @@ Containerized Ansible for use with Google Compute Engine
 
 * Uses gcp_compute inventory plugin for dynamic inventory (requires service account)
 * Uses same service account with installed gcloud to automagically connect to instances
+* Uses instance labels to create Ansible groups
 
 ### Status
 [![Build Status](https://travis-ci.org/chad-autry/wac-gce-ansible.svg?branch=master)](https://travis-ci.org/chad-autry/wac-gce-ansible)
