@@ -19,7 +19,7 @@ Containerized Ansible for use with Google Compute Engine
 * Mount the top directory as /var/ansible. It is used as the working directory of the container.
 * Mount the directory which contains the service account file
 * Pass in the GCE project id as an environment variable
-** Note: The ID might not be the name, it might be the name with some additional digits appended
+    * Note: The ID might not be the name, it might be the name with some additional digits appended
 
 ```shell
 docker run -it --rm -v <playbook_directory>:/var/ansible -v /<service_account_directory>:/srcs -e GCP_SERVICE_ACCOUNT_FILE='/srcs/<service_account_json_credentials_name>' -e GCP_PROJECT='<project>' chadautry/wac-gce-ansible ansible-playbook /var/ansible/site.yml
