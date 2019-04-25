@@ -13,6 +13,7 @@ Containerized Ansible for use with Google Compute Engine
 * [Create a service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
 * Grant the service account the Compute Admin, Compute OS Admin Login, Compute OS Login, and Service Account User IAM Roles
 * [Create and download json credentials](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
+* [Enable OSLogin for your project](https://cloud.google.com/compute/docs/instances/managing-instance-access#enable_oslogin)
 
 # Example
 * Use one of the [default directory layouts](http://docs.ansible.com/ansible/playbooks_best_practices.html#directory-layout) for playbooks and files.
