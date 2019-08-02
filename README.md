@@ -25,3 +25,11 @@ Containerized Ansible for use with Google Compute Engine
 ```shell
 docker run -it --rm -v <playbook_directory>:/var/ansible -v /<service_account_directory>:/srcs -e GCP_SERVICE_ACCOUNT_FILE='/srcs/<service_account_json_credentials_name>' -e GCP_PROJECT='<project>' chadautry/wac-gce-ansible ansible-playbook /var/ansible/site.yml
 ```
+
+# Lookout for
+Occasionally you may encounter an error 'Login profile size exceeds 32 KiB. Delete profile values to make additional space.'
+It just means too many ssh keys have built up for your service account.
+```
+gcloud auth activate-service-account --key-file=<yourKeyFile>
+for i in $(gcloud compute os-login ssh-keys list | grep -v FINGERPRINT); do echo $i; gcloud compute os-login ssh-keys remove --key $i; done
+```
